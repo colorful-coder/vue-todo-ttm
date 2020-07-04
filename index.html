@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    </link>
+    <title>Vuejs TodoList with LocalStorage</title>
+</head>
+
+<body>
+    <div id="app">
+        <todo-list inline-template>
+            <div class="container mt-5">
+                <div class="add_item mb-3">
+                    <input class="form-control" placeholder="New item" v-model="newTodo" 
+                        @keydown.enter="addTodo">
+                    <button type="button" class="btn btn-outline-success"
+                        @click="addTodo">Add</button>
+                </div>
+
+                <div class="row mb-2" v-for="(todo,index) in todos">
+                    <div class="col-9 pl-5">
+                        {{ todo.text }}
+                    </div>
+
+                    <div class="col-3">
+                        <button type="button" class="btn btn-outline-success"
+                            @click="todo.completed = !todo.completed">Edit</button>
+                        <button type="button" class="btn btn-outline-danger"
+                            @click="deleteTodo(todo)">delete</button>
+                    </div>
+                    <input class="col-8 ml-5" v-if="todo.completed" type="text"
+                        @keydown.enter="todo.completed = !todo.completed" v-model="todo.text">
+                </div>
+            </div>
+        </todo-list>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>
